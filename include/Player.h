@@ -12,7 +12,7 @@ private:
     double rating;
 
 public:
-    Player(const std::string& name = "", int level = 0, double rating = 0.0);
+    explicit Player(const std::string& name = "", int level = 0, double rating = 0.0);
     Player(const Player& other);
     Player& operator=(const Player& other);
 
