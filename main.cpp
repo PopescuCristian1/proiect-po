@@ -33,25 +33,25 @@ void menu() {
                     std::string name;
                     int level;
                     double rating;
-                    
-                    std::cout << "Enter name: ";
-                    std::cin.ignore();
+
+                    std::cout << "Enter name (single word or full name): ";
+                    std::cin.ignore(); // Curăță fluxul de newline-uri
                     std::getline(std::cin, name);
 
                     std::cout << "Enter level and rating: ";
-                    std::cin >> level >> rating;
-
-                    if(std::cin.fail() || level < 0 || rating < 0) {
-                        std::cout << "Invalid input. Try again\n";
-                        std::cin.clear();
-                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                        continue;
+                    if (!(std::cin >> level >> rating) || level < 0 || rating < 0) {
+                    std::cout << "Invalid input. Try again.\n";
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    continue;
                     }
+
                     Player player(name, level, rating);
                     playerContainer.add(player);
                     entities.push_back(std::make_unique<Player>(player));
                     break;
                 }
+
                 }
                 case 2: {
                     std::string role;
