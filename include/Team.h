@@ -1,9 +1,9 @@
-// Team.h
 #ifndef TEAM_H
 #define TEAM_H
 
 #include <iostream>
 #include <vector>
+#include <memory>
 #include <algorithm>
 #include "Utility.h"
 #include "CustomException.h"
@@ -11,7 +11,7 @@
 class Team {
 private:
     std::vector<Utility> utilities;
-    static Team* instance;
+    static std::unique_ptr<Team> instance;
 
     Team() = default; 
 
@@ -25,7 +25,7 @@ public:
     void displayUtilities() const;
     void sortUtilities();
 
-    ~Team(); 
+    ~Team() = default; 
 };
 
-#endif
+#endif 
