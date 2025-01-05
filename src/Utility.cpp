@@ -21,10 +21,6 @@ Utility::~Utility() {
     instances--;
 }
 
-int Utility::getInstances() {
-    return instances;
-}
-
 std::ostream& operator<<(std::ostream& os, const Utility& utility) {
     os << utility.value;
     return os;
@@ -41,8 +37,4 @@ bool Utility::operator<(const Utility& other) const {
 
 bool operator==(const Utility& a, const Utility& b) {
     return a.value == b.value;
-}
-
-int Utility::getValue() const {
-    return value;
 }
