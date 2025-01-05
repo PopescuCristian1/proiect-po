@@ -35,7 +35,7 @@ void menu() {
                     double rating;
 
                     std::cout << "Enter name: ";
-                    std::cin.ignore(); // Ignorăm newline-ul rămas
+                    std::cin.ignore(); 
                     std::getline(std::cin, name);
 
                     std::cout << "Enter level and rating: ";
@@ -48,7 +48,7 @@ void menu() {
 
                 Player player(name, level, rating);
                 playerContainer.add(player);
-                entities.push_back(std::unique_ptr<Player>(new Player(player))); // Folosim new
+                entities.push_back(std::unique_ptr<Player>(new Player(player))); 
                 break;
             }
 
@@ -61,7 +61,7 @@ void menu() {
 
                 NPC npc(role);
                 npcContainer.add(npc);
-                entities.push_back(std::unique_ptr<NPC>(new NPC(role))); // Folosim new
+                entities.push_back(std::unique_ptr<NPC>(new NPC(role))); 
                 break;
                 }
 
