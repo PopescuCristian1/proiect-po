@@ -10,4 +10,4 @@ public:
     }
 };
 
-#endif // CUSTOM_EXCEPTION_H
+#endif 
