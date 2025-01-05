@@ -33,22 +33,38 @@ void menu() {
                     std::string name;
                     int level;
                     double rating;
-                    std::cout << "Enter name, level, and rating: ";
-                    std::cin >> name >> level >> rating;
-                    Player player(name, level, rating);
-                    playerContainer.add(player);
-                    entities.push_back(std::make_unique<Player>(player));
+
+                    std::cout << "Enter name: ";
+                    std::cin.ignore(); // Ignorăm newline-ul rămas
+                    std::getline(std::cin, name);
+
+                    std::cout << "Enter level and rating: ";
+                    if (!(std::cin >> level >> rating) || level < 0 || rating < 0) {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    std::cout << "Invalid input. Level and rating must be positive numbers.\n";
                     break;
                 }
-                case 2: {
-                    std::string role;
-                    std::cout << "Enter NPC role: ";
-                    std::cin >> role;
-                    NPC npc(role);
-                    npcContainer.add(npc);
-                    entities.push_back(std::make_unique<NPC>(role));
-                    break;
+
+                Player player(name, level, rating);
+                playerContainer.add(player);
+                entities.push_back(std::unique_ptr<Player>(new Player(player))); // Folosim new
+                break;
+            }
+
+            case 2: {
+                std::string role;
+
+                std::cout << "Enter NPC role: ";
+                std::cin.ignore();
+                std::getline(std::cin, role);
+
+                NPC npc(role);
+                npcContainer.add(npc);
+                entities.push_back(std::unique_ptr<NPC>(new NPC(role))); // Folosim new
+                break;
                 }
+
                 case 3: {
                     int value;
                     std::cout << "Enter utility value: ";
