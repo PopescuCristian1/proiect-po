@@ -11,12 +11,11 @@
 class Team {
 private:
     std::vector<Utility> utilities;
-    static Team* instance; // Singleton instance
+    static Team* instance;
 
-    Team() = default; // Private constructor for Singleton
+    Team() = default; 
 
 public:
-    // Delete copy constructor and assignment operator
     Team(const Team&) = delete;
     Team& operator=(const Team&) = delete;
 
@@ -26,7 +25,7 @@ public:
     void displayUtilities() const;
     void sortUtilities();
 
-    ~Team(); // Destructor
+    ~Team(); 
 };
 
 #endif // TEAM_H
