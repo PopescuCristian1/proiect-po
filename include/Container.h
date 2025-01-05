@@ -29,4 +29,4 @@ public:
     }
 };
 
-#endif // CONTAINER_H
+#endif
