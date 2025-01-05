@@ -37,7 +37,7 @@ void menu() {
                     std::cin >> name >> level >> rating;
                     Player player(name, level, rating);
                     playerContainer.add(player);
-                    entities.push_back(make_unique<Player>(player));
+                    entities.push_back(std::make_unique<Player>(player));
                     break;
                 }
                 case 2: {
