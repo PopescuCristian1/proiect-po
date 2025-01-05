@@ -4,10 +4,11 @@
 Team* Team::instance = nullptr;
 
 Team* Team::getInstance() {
-    static std::unique_ptr<Team> instance(new Team());
-    return instance.get();
+    if (!instance) {
+        instance = new Team();
+    }
+    return instance;
 }
-
 
 void Team::addUtility(const Utility& utility) {
     utilities.push_back(utility);
