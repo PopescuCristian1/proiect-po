@@ -22,4 +22,4 @@ public:
     friend std::istream& operator>>(std::istream& is, Player& player);
 };
 
-#endif // PLAYER_H
+#endif
