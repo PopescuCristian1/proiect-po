@@ -10,7 +10,7 @@ private:
     std::string role;
 
 public:
-    NPC(const std::string& role = "");
+    explicit NPC(const std::string& role = "");
     void display() const override;
 };
 
