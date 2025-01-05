@@ -9,7 +9,7 @@ private:
     int value;
 
 public:
-    Utility(int value = 0);
+    explicit Utility(int value = 0);
     Utility(const Utility& other);
     Utility& operator=(const Utility& other);
     ~Utility();
