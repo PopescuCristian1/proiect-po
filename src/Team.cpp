@@ -1,15 +1,13 @@
 // Team.cpp
 #include "Team.h"
 
-// Initialize static instance
 Team* Team::instance = nullptr;
 
 Team* Team::getInstance() {
-    if (!instance) {
-        instance = new Team();
-    }
-    return instance;
+    static std::unique_ptr<Team> instance(new Team());
+    return instance.get();
 }
+
 
 void Team::addUtility(const Utility& utility) {
     utilities.push_back(utility);
@@ -31,5 +29,4 @@ void Team::sortUtilities() {
 }
 
 Team::~Team() {
-    // Singleton instance cleanup is not explicitly required here
 }
