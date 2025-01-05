@@ -1,34 +1,35 @@
-// Team.cpp
 #include "Team.h"
-#include <memory>
 
-std::unique_ptr<Team> Team::instance = nullptr; 
+
+Team* Team::instance = nullptr;
 
 Team* Team::getInstance() {
     if (!instance) {
-        instance = std::make_unique<Team>(); 
+        instance = new Team(); 
     }
-    return instance.get();
+    return instance;
 }
 
 void Team::addUtility(const Utility& utility) {
-    utilities.push_back(std::make_unique<Utility>(utility)); 
+    utilities.push_back(utility); 
 }
 
 void Team::displayUtilities() const {
     for (const auto& utility : utilities) {
-        std::cout << *utility << '\n'; 
+        std::cout << utility << '\n'; 
     }
 }
 
 void Team::sortUtilities() {
     if (utilities.empty()) {
-        throw CustomException();
+        throw CustomException(); 
     }
-    std::sort(utilities.begin(), utilities.end(), [](const std::unique_ptr<Utility>& a, const std::unique_ptr<Utility>& b) {
-        return *a < *b; 
+    std::sort(utilities.begin(), utilities.end(), [](const Utility& a, const Utility& b) {
+        return a < b; 
     });
 }
 
 Team::~Team() {
+    delete instance; 
+    instance = nullptr;
 }
