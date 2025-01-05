@@ -1,3 +1,11 @@
+#include "Player.h"
+#include "NPC.h"
+#include "Team.h"
+#include "Container.h"
+#include "CustomException.h"
+#include <memory>
+#include <vector>
+
 void menu() {
     Team* team = Team::getInstance();
     std::vector<std::unique_ptr<AbstractEntity>> entities;
@@ -19,13 +27,6 @@ void menu() {
         int choice;
         std::cin >> choice;
 
-        if (std::cin.fail() || choice < 1 || choice > 8) {
-            std::cout << "Invalid option. Try again.\n";
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            continue;
-        }
-
         try {
             switch (choice) {
                 case 1: {
@@ -34,14 +35,6 @@ void menu() {
                     double rating;
                     std::cout << "Enter name, level, and rating: ";
                     std::cin >> name >> level >> rating;
-
-                    if (std::cin.fail()) {
-                        std::cout << "Invalid input. Try again.\n";
-                        std::cin.clear();
-                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                        continue;
-                    }
-
                     Player player(name, level, rating);
                     playerContainer.add(player);
                     entities.push_back(std::make_unique<Player>(player));
@@ -51,14 +44,6 @@ void menu() {
                     std::string role;
                     std::cout << "Enter NPC role: ";
                     std::cin >> role;
-
-                    if (std::cin.fail()) {
-                        std::cout << "Invalid input. Try again.\n";
-                        std::cin.clear();
-                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                        continue;
-                    }
-
                     NPC npc(role);
                     npcContainer.add(npc);
                     entities.push_back(std::make_unique<NPC>(role));
@@ -68,14 +53,9 @@ void menu() {
                     int value;
                     std::cout << "Enter utility value: ";
                     std::cin >> value;
-
-                    if (std::cin.fail() || value < 0) {
-                        std::cout << "Invalid utility value. Must be non-negative. Try again.\n";
-                        std::cin.clear();
-                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                        continue;
+                    if (value < 0) {
+                        throw CustomException();
                     }
-
                     team->addUtility(Utility(value));
                     break;
                 }
@@ -121,4 +101,9 @@ void menu() {
             std::cerr << "Standard exception: " << e.what() << '\n';
         }
     }
+}
+
+int main() {
+    menu();
+    return 0;
 }
