@@ -107,15 +107,10 @@ FetchContent_MakeAvailable(googletest)
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing name here
 add_executable(${MAIN_EXECUTABLE_NAME}
         main.cpp
-        src/user.cpp
-        src/client.cpp
-        src/carte.cpp
-        src/angajat.cpp
-        src/biblioteca.cpp
-        src/registru.cpp
-        src/exceptii.cpp
-        src/observer.cpp
-        src/factory.cpp)
+        src/NPC.cpp
+        src/Player.cpp
+        src/Team.cpp
+        src/Utility.cpp)
 
 include(cmake/CompilerFlags.cmake)
 
