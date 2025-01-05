@@ -14,4 +14,4 @@ public:
     void display() const override;
 };
 
-#endif // NPC_H
+#endif
