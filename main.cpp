@@ -6,11 +6,6 @@
 #include <memory>
 #include <vector>
 
-template <typename T, typename... Args>
-std::unique_ptr<T> make_unique(Args&&... args) {
-    return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
-}
-
 void menu() {
     Team* team = Team::getInstance();
     std::vector<std::unique_ptr<AbstractEntity>> entities;
@@ -51,7 +46,7 @@ void menu() {
                     std::cin >> role;
                     NPC npc(role);
                     npcContainer.add(npc);
-                    entities.push_back(make_unique<NPC>(role));
+                    entities.push_back(std::make_unique<NPC>(role));
                     break;
                 }
                 case 3: {
