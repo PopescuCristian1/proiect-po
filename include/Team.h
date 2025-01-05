@@ -19,7 +19,7 @@ public:
     Team(const Team&) = delete;
     Team& operator=(const Team&) = delete;
 
-    static Team* getInstance(); // Access the Singleton instance
+    static Team* getInstance();
 
     void addUtility(const Utility& utility);
     void displayUtilities() const;
@@ -28,4 +28,4 @@ public:
     ~Team(); 
 };
 
-#endif // TEAM_H
+#endif
