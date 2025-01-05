@@ -11,15 +11,16 @@
 class Team {
 private:
     std::vector<Utility> utilities;
-    static std::unique_ptr<Team> instance;
+    static std::unique_ptr<Team> instance; 
 
-    Team() = default; 
+    Team() = default;
 
 public:
+    // Ștergerea copierii
     Team(const Team&) = delete;
     Team& operator=(const Team&) = delete;
 
-    static Team* getInstance();
+    static Team* getInstance(); 
 
     void addUtility(const Utility& utility);
     void displayUtilities() const;
