@@ -6,11 +6,6 @@
 #include <memory>
 #include <vector>
 
-template <typename T, typename... Args>
-std::unique_ptr<T> make_unique(Args&&... args) {
-    return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
-}
-
 void menu() {
     Team* team = Team::getInstance();
     std::vector<std::unique_ptr<AbstractEntity>> entities;
