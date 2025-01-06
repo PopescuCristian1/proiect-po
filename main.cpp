@@ -13,7 +13,15 @@ void menu() {
     Container<Player> playerContainer;
     Container<NPC> npcContainer;
 
+    int invalidInputCount = 0; 
+    const int maxInvalidInputs = 10; 
+
     while (true) {
+        if (invalidInputCount >= maxInvalidInputs) {
+            std::cout << "Too many invalid inputs. Exiting program.\n";
+            return;
+        }
+
         std::cout << "\nMenu:\n";
         std::cout << "1. Add Player\n";
         std::cout << "2. Add NPC\n";
@@ -26,11 +34,12 @@ void menu() {
         std::cout << "Choose an option: ";
 
         int choice;
-        while (!(std::cin >> choice)) {
+        if (!(std::cin >> choice)) {
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Invalid input. Please enter a number between 1 and 8.\n";
-            std::cout << "Choose an option: ";
+            invalidInputCount++;
+            continue;
         }
 
         try {
@@ -45,19 +54,21 @@ void menu() {
                     std::getline(std::cin, name);
 
                     std::cout << "Enter player's level: ";
-                    while (!(std::cin >> level)) {
+                    if (!(std::cin >> level)) {
                         std::cin.clear();
                         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                         std::cout << "Invalid input. Please enter an integer for the level.\n";
-                        std::cout << "Enter player's level: ";
+                        invalidInputCount++;
+                        continue;
                     }
 
                     std::cout << "Enter player's rating: ";
-                    while (!(std::cin >> rating)) {
+                    if (!(std::cin >> rating)) {
                         std::cin.clear();
                         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                         std::cout << "Invalid input. Please enter a valid number for the rating.\n";
-                        std::cout << "Enter player's rating: ";
+                        invalidInputCount++;
+                        continue;
                     }
 
                     Player player(name, level, rating);
@@ -81,11 +92,12 @@ void menu() {
                     int value;
 
                     std::cout << "Enter utility value: ";
-                    while (!(std::cin >> value)) {
+                    if (!(std::cin >> value)) {
                         std::cin.clear();
                         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                         std::cout << "Invalid input. Please enter an integer.\n";
-                        std::cout << "Enter utility value: ";
+                        invalidInputCount++;
+                        continue;
                     }
 
                     if (value < 0) {
@@ -127,9 +139,12 @@ void menu() {
                 }
                 default: {
                     std::cout << "Invalid option. Please choose a valid option (1-8).\n";
-                    break;
+                    invalidInputCount++;
+                    continue;
                 }
             }
+
+            invalidInputCount = 0; 
         } catch (const CustomException& e) {
             std::cerr << e.what() << '\n';
         } catch (const std::exception& e) {
@@ -137,7 +152,6 @@ void menu() {
         }
     }
 }
-
 int main() {
     menu();
     return 0;
