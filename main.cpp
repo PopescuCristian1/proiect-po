@@ -5,6 +5,7 @@
 #include "CustomException.h"
 #include <memory>
 #include <vector>
+#include <limits> 
 
 void menu() {
     Team* team = Team::getInstance();
@@ -25,7 +26,12 @@ void menu() {
         std::cout << "Choose an option: ";
 
         int choice;
-        std::cin >> choice;
+        while (!(std::cin >> choice)) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Invalid input. Please enter a number between 1 and 8.\n";
+            std::cout << "Choose an option: ";
+        }
 
         try {
             switch (choice) {
@@ -33,8 +39,27 @@ void menu() {
                     std::string name;
                     int level;
                     double rating;
-                    std::cout << "Enter name, level, and rating: ";
-                    std::cin >> name >> level >> rating;
+
+                    std::cout << "Enter player's name: ";
+                    std::cin.ignore();
+                    std::getline(std::cin, name);
+
+                    std::cout << "Enter player's level: ";
+                    while (!(std::cin >> level)) {
+                        std::cin.clear();
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                        std::cout << "Invalid input. Please enter an integer for the level.\n";
+                        std::cout << "Enter player's level: ";
+                    }
+
+                    std::cout << "Enter player's rating: ";
+                    while (!(std::cin >> rating)) {
+                        std::cin.clear();
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                        std::cout << "Invalid input. Please enter a valid number for the rating.\n";
+                        std::cout << "Enter player's rating: ";
+                    }
+
                     Player player(name, level, rating);
                     playerContainer.add(player);
                     entities.push_back(std::unique_ptr<Player>(new Player(player)));
@@ -42,8 +67,11 @@ void menu() {
                 }
                 case 2: {
                     std::string role;
+
                     std::cout << "Enter NPC role: ";
-                    std::cin >> role;
+                    std::cin.ignore();
+                    std::getline(std::cin, role);
+
                     NPC npc(role);
                     npcContainer.add(npc);
                     entities.push_back(std::unique_ptr<NPC>(new NPC(role)));
@@ -51,8 +79,15 @@ void menu() {
                 }
                 case 3: {
                     int value;
+
                     std::cout << "Enter utility value: ";
-                    std::cin >> value;
+                    while (!(std::cin >> value)) {
+                        std::cin.clear();
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                        std::cout << "Invalid input. Please enter an integer.\n";
+                        std::cout << "Enter utility value: ";
+                    }
+
                     if (value < 0) {
                         throw CustomException();
                     }
@@ -91,7 +126,7 @@ void menu() {
                     return;
                 }
                 default: {
-                    std::cout << "Invalid option. Try again.\n";
+                    std::cout << "Invalid option. Please choose a valid option (1-8).\n";
                     break;
                 }
             }
