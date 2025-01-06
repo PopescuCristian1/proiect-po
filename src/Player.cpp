@@ -28,3 +28,4 @@ std::istream& operator>>(std::istream& is, Player& player) {
     is >> player.name >> player.level >> player.rating;
     return is;
 }
+//x
