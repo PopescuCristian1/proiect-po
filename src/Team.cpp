@@ -27,4 +27,4 @@ void Team::sortUtilities() {
     std::sort(utilities.begin(), utilities.end(), [](const Utility& a, const Utility& b) {
         return a < b;
     });
-}
+}//x
