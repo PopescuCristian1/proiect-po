@@ -7,4 +7,4 @@ public:
     virtual ~AbstractEntity() {}
 };
 
-#endif
+#endif //x
