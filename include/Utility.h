@@ -23,4 +23,4 @@ public:
     int getValue() const;
 };
 
-#endif
+#endif //x
