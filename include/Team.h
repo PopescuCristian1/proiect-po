@@ -16,7 +16,6 @@ private:
     Team() = default;
 
 public:
-    // Ștergerea copierii
     Team(const Team&) = delete;
     Team& operator=(const Team&) = delete;
 
