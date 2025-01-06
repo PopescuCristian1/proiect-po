@@ -37,4 +37,4 @@ bool Utility::operator<(const Utility& other) const {
 
 bool operator==(const Utility& a, const Utility& b) {
     return a.value == b.value;
-}
+} //x
